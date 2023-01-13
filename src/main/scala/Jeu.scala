@@ -37,6 +37,7 @@ class Jeu() {
     }
     neighbors
   }
+  
 
   def random_coords(m: Array[Array[Int]]): (Int, Int) = {
     val i = scala.util.Random.nextInt(m.length)
@@ -72,12 +73,10 @@ class Jeu() {
   }
 
   def init_game(w : Int, h : Int , n : Int) : Array[Array[Case]] = {
-      //initialise une matrice de dimension (w,h)
-      //avec n mines
       val matrixIntermediaire = initialiseMatrix(w,h)
       random_mines(matrixIntermediaire,n)
       val matrice = matrixIntermediaire.map(x => x.map( y => init_case(y)))
-    matrice
+      matrice
   }
 
 

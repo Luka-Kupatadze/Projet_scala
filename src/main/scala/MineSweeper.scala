@@ -4,12 +4,12 @@ import scala.io.StdIn
 
 class MineSweeper(i : Int , j : Int , n : Int) {
 
-  var matrice = new Jeu().init_game(i,j,n)
+  var jeu = new Jeu()
+  var matrice = jeu.init_game(i,j,n)
 
 
   def jouer() : Unit = {
     display()
-    //lire les coordonnées et les transformer en (int,int)
     var coord = StdIn.readLine("Entrez les coordonnées de la case à dévoiler : ")
       .drop(1)
       .dropRight(1)
@@ -21,14 +21,30 @@ class MineSweeper(i : Int , j : Int , n : Int) {
   def display() : Unit = {
     matrice.foreach(ligne => {
       ligne.foreach(colonne => {
-        print(colonne.value)
+        if (colonne.decouvert) print("| " + colonne.value + " |")
+        else print("|   |")
       })
       println()
     })
   }
 
   def interact(i : Int , j : Int): Unit ={
-
+    if (matrice(i)(j).value == -1) {
+      println("Vous avez perdu !")
+      System.exit(0)
+    }
+    else {
+      matrice(i)(j).decouvert = true
+      if (matrice(i)(j).value == 0) {
+        for (i <- -1 to 1; j <- -1 to 1){
+          if (i != 0 || j != 0) {
+            
+            }
+          }
+        }
+      }
+      
+    }
+    jouer()
   }
 
-}
