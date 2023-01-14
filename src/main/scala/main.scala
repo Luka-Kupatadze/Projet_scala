@@ -1,6 +1,6 @@
 package main.scala
 
 object main extends App {
-   var jeu = new MineSweeper(2,2,1)
+   var jeu = new MineSweeper()
    jeu.jouer()
 }
