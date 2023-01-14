@@ -141,7 +141,8 @@ class MineSweeper() {
 
   def display(): Unit = {
 
-    //triche
+    //triche : permet de tricher si on le souhaite
+    /*
     matrice.foreach(ligne => {
       print("| ")
       ligne.foreach(colonne => {
@@ -150,16 +151,16 @@ class MineSweeper() {
       println()
     })
     println()
-
+    */
 
     //définission de l'espacement par defaut entre l'axe des abscisse et le jeu
     var espacementGauche = " " * matrice.length.toString.length + "|"
     //début des abscisses
-    println("^")
+    println(YELLOW+ "^" + RESET)
     var n = matrice.length
     matrice.foreach(ligne => {
-      println("|  " + espacementGauche.dropRight(1) + ("---------" * (ligne.length)).dropRight(ligne.length - 1))
-      print("| " + (n) + espacementGauche.drop(n.toString.length - 1))
+      println(YELLOW + "|" + RESET + "  " + espacementGauche.dropRight(1) + ("---------" * (ligne.length)).dropRight(ligne.length - 1))
+      print(YELLOW + "|"+" " + (n)+ RESET + espacementGauche.drop(n.toString.length - 1))
       n -= 1
       ligne.foreach(colonne => {
         if (colonne.decouvert) {
@@ -185,15 +186,16 @@ class MineSweeper() {
       })
       println()
     })
-    println(("|  " + espacementGauche.dropRight(1) + "---------" * (matrice(0).length)).dropRight(matrice(0).length - 1))
-    print("|  " + espacementGauche.dropRight(1) + " ")
+    println((YELLOW + "|" + RESET+"  " + espacementGauche.dropRight(1) + "---------" * (matrice(0).length)).dropRight(matrice(0).length - 1))
+    print(YELLOW + "|" + RESET+"  " + espacementGauche.dropRight(1) + " ")
     var espacementBas = "   "
     var m = 1
     while (m <= matrice(0).length) {
-      print(espacementBas.drop(m.toString.length - 1) + m + "    ")
+      print(espacementBas.drop(m.toString.length - 1) +YELLOW + m + RESET + "    ")
       m = m + 1
     }
     println("")
+    println(YELLOW + ("---" + "-"*espacementGauche.length + "---------" * (matrice(0).length)).dropRight(matrice(0).length - 1)+">" + RESET)
 
   }
 
@@ -210,7 +212,6 @@ class MineSweeper() {
         matrice(j)(i).decouvert = true
         case_restante -= 1
         if (matrice(j)(i).value == 0) {
-          println(fonctions.get_neighbors(matrice, i, j))
           fonctions.get_neighbors(matrice, i, j).foreach((x, y) => {
             if (!matrice(y)(x).decouvert) interact(x, y)
           })
